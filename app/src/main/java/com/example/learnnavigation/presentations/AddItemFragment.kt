@@ -69,11 +69,6 @@ class AddItemFragment : Fragment() {
                 datePickerDialog?.show()
             })
             buttonadd.setOnClickListener {
-//                val date = etDate.text.toString()
-//                val name = etName.text.toString()
-//                val quantity = etQty.text.toString()
-//                val price = etPrice.text.toString()
-//                val items = Items(date, name, price, quantity)
                 items = Items(
                     date = etDate.text.toString(),
                     name = etName.text.toString(),
@@ -87,26 +82,26 @@ class AddItemFragment : Fragment() {
     }
 
     private fun subscribe() = viewModel.isValid.observe(this) {
-            when (it.status) {
-                ResourceStatus.LOADING -> {
-                    loadingDialog.show()
-                }
-                ResourceStatus.SUCCESS -> {
-                    sharedViewModel.addItem(items!!)
-                    loadingDialog.hide()
-                    clearInput()
-                    Toast.makeText(requireContext(), "data has been added", Toast.LENGTH_SHORT).show()
-                }
-                ResourceStatus.FAIL -> {
-                    loadingDialog.hide()
-                    Toast.makeText(
-                        requireContext(),
-                        it.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+        when (it.status) {
+            ResourceStatus.LOADING -> {
+                loadingDialog.show()
+            }
+            ResourceStatus.SUCCESS -> {
+                sharedViewModel.addItem(items!!)
+                loadingDialog.hide()
+                clearInput()
+                Toast.makeText(requireContext(), "data has been added", Toast.LENGTH_SHORT).show()
+            }
+            ResourceStatus.FAIL -> {
+                loadingDialog.hide()
+                Toast.makeText(
+                    requireContext(),
+                    it.message,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
+    }
 
     private fun clearInput() {
         binding.etDate.setText("")

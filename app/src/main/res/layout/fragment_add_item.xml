@@ -76,7 +76,7 @@
             android:background="@drawable/background_shape"
             android:ems="10"
             android:hint="Price"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:maxLines="1"
             android:padding="15dp"
             android:textColor="@color/black"
