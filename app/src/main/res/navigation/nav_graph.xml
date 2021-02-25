@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/addItemFragment">
+
+    <fragment
+        android:id="@+id/addItemFragment"
+        android:name="com.example.learnnavigation.presentations.AddItemFragment"
+        android:label="fragment_add_item"
+        tools:layout="@layout/fragment_add_item" />
+    <fragment
+        android:id="@+id/listItemFragment"
+        android:name="com.example.learnnavigation.presentations.ListItemFragment"
+        android:label="fragment_list_item"
+        tools:layout="@layout/fragment_list_item" />
+    <action
+        android:id="@+id/action_global_addItemFragment"
+        app:destination="@id/addItemFragment" />
+    <action
+        android:id="@+id/action_global_listItemFragment"
+        app:destination="@id/listItemFragment" />
+</navigation>
