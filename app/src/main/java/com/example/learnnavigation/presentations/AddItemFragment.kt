@@ -10,19 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
-import com.example.learnnavigation.utils.ItemList
 import com.example.learnnavigation.utils.Items
-import com.example.learnnavigation.R
 import com.example.learnnavigation.components.LoadingDialog
 import com.example.learnnavigation.databinding.FragmentAddItemBinding
 import com.example.learnnavigation.models.AddItemFragmentViewModel
 import com.example.learnnavigation.models.ItemViewModel
 import com.example.learnnavigation.utils.ResourceStatus
-import kotlinx.android.synthetic.main.fragment_add_item.*
 import java.util.*
 
 
@@ -35,7 +30,6 @@ class AddItemFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initViewModel()
         subscribe()
     }
@@ -50,7 +44,6 @@ class AddItemFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
@@ -76,16 +69,16 @@ class AddItemFragment : Fragment() {
                 datePickerDialog?.show()
             })
             buttonadd.setOnClickListener {
-
-                if (!etQty.text.toString().isNullOrEmpty() && !etPrice.text.toString().isNullOrEmpty()) {
-                    val qty = etQty.text.toString().toInt()
-                    val price = etPrice.text.toString().toInt()
-                }
-                val item = Items(
+//                val date = etDate.text.toString()
+//                val name = etName.text.toString()
+//                val quantity = etQty.text.toString()
+//                val price = etPrice.text.toString()
+//                val items = Items(date, name, price, quantity)
+                items = Items(
                     date = etDate.text.toString(),
                     name = etName.text.toString(),
-                    quantity = etQty.text.toString().toInt(),
-                    price = etPrice.text.toString().toInt()
+                    quantity = etQty.text.toString(),
+                    price = etPrice.text.toString()
                 )
                 viewModel.inputValidation(items!!)
             }
@@ -93,15 +86,16 @@ class AddItemFragment : Fragment() {
         return binding.root
     }
 
-    private fun subscribe() {
-        viewModel.isValid.observe(this) {
+    private fun subscribe() = viewModel.isValid.observe(this) {
             when (it.status) {
                 ResourceStatus.LOADING -> {
                     loadingDialog.show()
                 }
                 ResourceStatus.SUCCESS -> {
                     sharedViewModel.addItem(items!!)
-                    Toast.makeText(requireContext(),"data has been added", Toast.LENGTH_SHORT).show()
+                    loadingDialog.hide()
+                    clearInput()
+                    Toast.makeText(requireContext(), "data has been added", Toast.LENGTH_SHORT).show()
                 }
                 ResourceStatus.FAIL -> {
                     loadingDialog.hide()
@@ -113,13 +107,12 @@ class AddItemFragment : Fragment() {
                 }
             }
         }
-    }
 
     private fun clearInput() {
-        etDate.setText("")
-        etName.setText("")
-        etPrice.setText("")
-        etQty.setText("")
+        binding.etDate.setText("")
+        binding.etName.setText("")
+        binding.etPrice.setText("")
+        binding.etQty.setText("")
     }
 
 }

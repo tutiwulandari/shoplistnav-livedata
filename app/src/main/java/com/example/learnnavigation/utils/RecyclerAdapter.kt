@@ -25,15 +25,15 @@ class RecyclerAdapter(val items : MutableList<Items>): RecyclerView.Adapter<Recy
     }
 
 
-    override fun getItemCount(): Int = ItemList.size
+    override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 //      val currentItem = ItemList[position]
 //        holder.ItemName.text = currentItem.name
-       holder.ItemName.setText(ItemList.get(position).name)
-        holder.ItemDate.setText(ItemList.get(position).date)
-        holder.ItemQuantity.setText(ItemList.get(position).quantity)
-        holder.ItemPrice.setText(ItemList.get(position).price)
+       holder.ItemName.setText(items.get(position).name)
+        holder.ItemDate.setText(items.get(position).date)
+        holder.ItemQuantity.setText(items.get(position).quantity)
+        holder.ItemPrice.setText(items.get(position).price)
 
     }
 

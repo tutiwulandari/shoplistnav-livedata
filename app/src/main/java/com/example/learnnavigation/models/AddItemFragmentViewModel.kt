@@ -27,9 +27,9 @@ class AddItemFragmentViewModel :ViewModel() {
                 _isValid.postValue(ResourceState.fail("Date cannot be null"))
             } else if(items.name.isNullOrBlank()) {
                 _isValid.postValue(ResourceState.fail("name cannot be null"))
-            } else if (items.quantity.toString().isNullOrBlank() && items.quantity <= 0 ) {
+            } else if (items.quantity.toString().isNullOrBlank()) {
                 _isValid.postValue(ResourceState.fail("quantity cannot be null"))
-            } else if(items.price.toString().isNullOrBlank() && items.price <= 0) {
+            } else if(items.price.toString().isNullOrBlank()) {
                 _isValid.postValue(ResourceState.fail("price cannot be null"))
             } else {
                 _isValid.postValue(ResourceState.success(true))

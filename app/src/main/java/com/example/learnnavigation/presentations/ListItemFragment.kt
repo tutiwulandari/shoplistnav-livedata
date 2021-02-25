@@ -39,13 +39,12 @@ class ListItemFragment : Fragment() {
         recycler_view.apply {
             layoutManager = LinearLayoutManager(activity)
             val items = viewModel.getItem()
+//            println(items.size)
+//            for(a in items) {
+//                println("LOOING -> ${a.name}")
+//            }
             adapter = RecyclerAdapter(items)
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            ListItemFragment()
-    }
 }
